@@ -13,9 +13,15 @@
 
     }
 
+    .striped thead{
+    background: lightgray;
+    font-size: 18px;
+    border: 1px solid grey;
+}
+
     #content{
       margin: 0px 100px;
-      background-color: grey;
+
     }
 
     #search{
@@ -26,8 +32,21 @@
     #search, #dropdown{
       display: inline-block;
       vertical-align: top;
+    }
 
+    #footer{
+      width: 50%;
+      margin: 0 auto;
+      padding-top: 30px;
+    }
 
+    #thead{
+      background-color: grey;
+      border: 2px solid black;
+    }
+
+    .nav.col.s6, .input-field {
+      height: 40px;
     }
 
 
@@ -64,7 +83,6 @@
               <div class="input-field">
                 <input id="search" type="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
               </div>
             </form>
         </nav>
@@ -92,6 +110,71 @@
 
       </nav>
 
+    </div>
+
+
+    <div id = "table">
+      <table class ="Striped">
+
+        <thead>
+          <tr>
+            <td> Order ID </td>
+            <td> Name </td>
+            <td> Date </td>
+            <td> Billing Address </td>
+            <td> Total </td>
+            <td> Status </td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td> 1 </td>
+            <td> Bob </td>
+            <td> 9/6/1990 </td>
+            <td> 123 Zanker Rd, San Jose </td>
+            <td> 14.55 </td>
+            <td> Shipped </td>
+          </tr>
+
+          <tr>
+            <td> 11</td>
+            <td> Jack </td>
+            <td> 3/6/1990 </td>
+            <td> 23232 Zanker Rd, San Jose </td>
+            <td> 122.55 </td>
+            <td> In process </td>
+          </tr>
+
+          <tr>
+            <td> 91</td>
+            <td> Michael </td>
+            <td> 3/6/1970 </td>
+            <td> 98 Jefferson Rd, San Francisco </td>
+            <td> 122.55 </td>
+            <td> In process </td>
+          </tr>
+      </table>
+  </div>
+
+
+
+
+    <div id = "footer">
+      <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!">6</a></li>
+        <li class="waves-effect"><a href="#!">7</a></li>
+        <li class="waves-effect"><a href="#!">8</a></li>
+        <li class="waves-effect"><a href="#!">9</a></li>
+
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
     </div>
 
 
