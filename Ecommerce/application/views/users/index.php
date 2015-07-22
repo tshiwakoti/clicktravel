@@ -109,9 +109,10 @@
           vertical-align: top;
         }
         #logAndReg input{
-          text-align: right;
+          text-align: left;
           background-color: black;
           margin: 4px;
+          color: white;
         }
         #logAndReg #regLabels, #regInfo, #logLabels, #logInfo{
           display: inline-block;
