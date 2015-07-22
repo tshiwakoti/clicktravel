@@ -53,3 +53,4 @@ $route['default_controller'] = 'Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //$route['/Productscontroller/add'] ='addproduct';
+$route['processCoords'] = 'Controller/processCoords';
