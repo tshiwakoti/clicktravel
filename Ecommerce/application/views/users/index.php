@@ -48,7 +48,7 @@
           //Fill hidden form with coordinates and name
           $("input[name=lat]").val(lat);
           $("#lng").val(lng);
-          $("#city_name").val(city_name);
+          //$("#city_name").val(city_name);
           //AUTO SUBMIT FORM        
           setTimeout("$('#coordinate_form').submit()", 400);
         });

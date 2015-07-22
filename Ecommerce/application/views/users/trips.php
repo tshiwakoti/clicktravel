@@ -8,7 +8,8 @@
       h3 { display: inline-block; }
       form { display: inline-block; }
       #cart { float: right; }
-      .description { border: 1px solid silver; }
+      .description { border: 1px solid silver; display: inline-block; width: 600px; vertical-align: top; }
+      #yelp { width: 300px; height: 200px; background-color: limegreen; display: inline-block; }
     </style>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript"
@@ -48,6 +49,9 @@
             <p class="description">
             <?= $city['description'] ?>
             </p>
+            <div id="yelp">
+              Pictures
+            </div>
           </div>
 <?php
          }
