@@ -2,7 +2,8 @@
 <html>
   <head>
     <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0; text-align: center; }
+      p { line-height: 5px; margin: 2px; }
     </style>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript"
@@ -15,27 +16,27 @@
     </script>
   </head>
   <form action="/#/#" method="post">
-    </h2>Shipping Information</h2>
-    First Name:<input type="text" name="first_name">
-    Last Name:<input type="text" name="last_name">
-    Address:<input type="text" name="address">
-    Address 2:<input type="text" name="address2">
-    City:<input type="text" name="city">
-    State:<input type="text" name="state">
-    Zipcode:<input type="text" name="zipcode">
+    <h2>Shipping Information</h2>
+    <p>First Name:<input type="text" name="first_name"></p>
+    <p>Last Name:<input type="text" name="last_name"></p>
+    <p>Address:<input type="text" name="address"></p>
+    <p>Address 2:<input type="text" name="address2"></p>
+    <p>City:<input type="text" name="city"></p>
+    <p>State:<input type="text" name="state"></p>
+    <p>Zipcode:<input type="text" name="zipcode"></p>
 
     <h2>Billing Information</h2>
-    Same as shipping<input type="radio">
-    First Name:<input type="text" name="bill_first_name">
-    Last Name:<input type="text" name="bill_last_name">
-    Address:<input type="text" name="bill_address">
-    Address 2:<input type="text" name="bill_address2">
-    City:<input type="text" name="bill_city">
-    State:<input type="text" name="bill_state">
-    Zipcode:<input type="text" name="bill_zipcode">
-    Card Number:<input type="password" name="ccnumber">
-    Security Code:<input type="password" name="cvv">
-    Expiration:
+    <p>Same as shipping<input type="radio">
+    <p>First Name:<input type="text" name="bill_first_name"></p>
+    <p>Last Name:<input type="text" name="bill_last_name"></p>
+    <p>Address:<input type="text" name="bill_address"></p>
+    <p>Address 2:<input type="text" name="bill_address2"></p>
+    <p>City:<input type="text" name="bill_city"></p>
+    <p>State:<input type="text" name="bill_state"></p>
+    <p>Zipcode:<input type="text" name="bill_zipcode"></p>
+    <p>Card Number:<input type="password" name="ccnumber"></p>
+    <p>Security Code:<input type="password" name="cvv"></p>
+    <p>Expiration:
       <select name="exp_month">
         <option> - Month - </option>
         <option value="January">January</option>
@@ -60,4 +61,5 @@
         <option value="2016">2016</option>
         <option value="2015">2015</option>
     </select>
+    <p><input type="submit" value="Pay Now"></p>
   </form>
