@@ -498,3 +498,12 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+//https://github.com/bcessa/php-stripe  Check this link for Stripe API 
+// Configuration options
+$config['stripe_key_test_public']         = '';
+$config['stripe_key_test_secret']         = 'sk_test_sYVEehEYsyyrCc8Fp94xIeMC';
+$config['stripe_key_live_public']         = '';
+$config['stripe_key_live_secret']         = 'sk_live_1vXnVS3kqoBrtWRBe2CsH5Iv';
+$config['stripe_test_mode']               = TRUE;
+$config['stripe_verify_ssl']              = FALSE;

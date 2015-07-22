@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Trips</title>
     <style type="text/css">
       #wrapper { height: 100%; width: 970px; background-image: 'background.png'; margin: 0px auto; }
       h1, p { display: inline-block; }
@@ -17,7 +18,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
 
-    });
+      });
     </script>
   </head>
   <body>
@@ -54,7 +55,6 @@
 
 
       </div>
-    </div
-
-
+    </div>
   </body>
+</html>

@@ -9,3 +9,12 @@
 		"mikey179/vfsStream": "1.1.*"
 	}
 }
+
+
+//PHP library for Stripe API
+
+{
+  "require": {
+    "stripe/stripe-php": "2.*"
+  }
+}
