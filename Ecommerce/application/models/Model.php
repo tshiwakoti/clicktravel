@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Model {
+class Model extends CI_Model {
 	public function register($post){
 		$this->form_validation->set_rules("first_name", "First Name", "trim|required|alpha|ssx_clean");
 		$this->form_validation->set_rules("last_name", "Last Name", "trim|required|alpha|ssx_clean");

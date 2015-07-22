@@ -17,7 +17,7 @@
 
         var mapOptions = {
           zoom: 3,
-          center: { lat: 16.103, lng: -22.803 },
+          center: { lat: 25.163, lng: -0.878 },
           mapTypeId: google.maps.MapTypeId.SATELLITE,
           disableDefaultUI: true
         };  
