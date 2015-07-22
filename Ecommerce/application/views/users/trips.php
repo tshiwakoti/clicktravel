@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Trips</title>
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
       h1, p { display: inline-block; }
@@ -13,7 +14,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
 
-    });
+      });
     </script>
   </head>
   <body>
@@ -30,7 +31,6 @@
 
 
       </div>
-    </div
-
-
+    </div>
   </body>
+</html>
