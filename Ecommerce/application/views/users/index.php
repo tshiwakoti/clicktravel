@@ -22,14 +22,17 @@
           disableDefaultUI: true
         };  
 
+
       function getAddress(lat, lng) {
         var latlng = new google.maps.LatLng(lat, lng);
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-              //console.log(results[0]);
-              alert(results[1].formatted_address);
+              
+              var city_name = results[1].formatted_address;
+              console.log(city_name);
+              $("#city_name").val(city_name);
             }
           }
         });
@@ -41,9 +44,13 @@
         google.maps.event.addListener(map, "click", function( event ) {
           var lat = event.latLng.A;
           var lng = event.latLng.F;
+          getAddress(lat, lng); 
+          //Fill hidden form with coordinates and name
           $("input[name=lat]").val(lat);
           $("#lng").val(lng);
-          $("#coordinate_form").submit();
+          $("#city_name").val(city_name);
+          //AUTO SUBMIT FORM        
+          setTimeout("$('#coordinate_form').submit()", 400);
         });
 
         // if ((dest)lat > .9(lat) && (dest)lat < 1.1(lat)){
@@ -176,9 +183,10 @@
       </form>
     </div>
     <div id="map-canvas"></div>
-    <form id="coordinate_form" method="post" action="processCoords" display: hidden>
-      <input type="text" id="lat" name="lat">
-      <input type="text" id="lng" name="lng">
+    <form id="coordinate_form" method="post" action="processCoords">
+      <input type="hidden" id="lat" name="lat">
+      <input type="hidden" id="lng" name="lng">
+      <input type="hidden" id="city_name" name="city_name">
     </form>
   </body>
 </html>
