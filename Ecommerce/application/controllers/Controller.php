@@ -8,7 +8,6 @@ class Controller extends CI_Controller {
 		parent::__construct();
 		//$this->output->enable_profiler();
 		$this->load->library('session');
-		$this->load->library('form_validation');
 		$this->load->library('googlemaps');
 		$this->load->model('Model');
 
@@ -17,6 +16,7 @@ class Controller extends CI_Controller {
 	 public function index()
 	{
 		$this->load->view('users/index');
+
   }
 
 	public function processCoords(){
@@ -24,14 +24,14 @@ class Controller extends CI_Controller {
 		$post = $this->input->post();
 		//SEND COORDINATES TO MODEL FOR DB PROCESSING
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
-		
+
 		//LOAD PARTIAL VIEW WITH RESULTS FROM DATABASE SEARCH
 		//$this->load->view('users/trips/partials', $)
-		
+
 		$results = array('results' => $post, 'cities' => $cities);
 		//LOAD VIEW AND SEND IT THE VARIABLE WITH THE PLACE NAME
 		$this->load->view('users/trips', $results);
-		
+
 
 	}
 

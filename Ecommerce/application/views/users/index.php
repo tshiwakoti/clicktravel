@@ -16,7 +16,7 @@
         var map;
         var mapOptions = {
           zoom: 3,
-          center: { lat: 16.103, lng: -22.803 },
+          center: { lat: 25.163, lng: -0.878 },
           mapTypeId: google.maps.MapTypeId.SATELLITE,
           disableDefaultUI: true
         };  
@@ -49,7 +49,7 @@
           $("input[name=lng").val(lng);
           //$("#city_name").val(getAddress(lat, lng));
           //AUTO SUBMIT FORM
-          setTimeout("$('#coordinate_form').submit()" , 800);
+          setTimeout("$('#coordinate_form').submit()" , 500);
         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);

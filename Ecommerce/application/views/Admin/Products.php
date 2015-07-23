@@ -76,12 +76,12 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="">Dashboard</a></li>
-          <li> <a href="file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/Orders.html#!">Orders</a></li>
+          <li class = "active"><a href="">Dashboard</a></li>
+          <li> <a href="/Admins/displayorders">Orders</a></li>
           <li class="active"><a href="">Products</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-          <li><a href="">Log off</a></li>
+          <li><a href="/Admins/logoff">Log off</a></li>
         </ul>
       </div>
     </nav>
@@ -113,44 +113,33 @@
       <table class = "striped">
         <thead id = "head">
           <tr>
-            <td> Picture </td>
-            <td> ID</td>
-            <td> Name </td>
-            <td> Inventory Count </td>
-            <td> Quantity Sold </td>
-            <td> action </td>
-
+            <td> ID </td>
+            <td> City Name </td>
+            <td> Duration </td>
+            <td> Price </td>
+            <td> Action </td>
           </tr>
         </thead>
 
+<!-- <?php
+var_dump ($packages);
+?> -->
         <tbody>
+<?php
+        foreach($packages as $package)
+        {
+?>
           <tr>
-            <td> <div class = "pic"> </div> </td>
-            <td> 1 </td>
-            <td> T-Shirt </td>
-            <td> 12 </td>
-            <td> 100 </td>
+            <td> <?= $package['id'] ?> </td>
+            <td> <?= $package['name'] ?> </td>
+            <td> <?= $package['duration'] ?> </td>
+            <td> <?= $package['price'] ?> </td>
             <td> <p class = "link"><a href = ""> edit</p>  <p class ="link" ><a href = ""> delete</p></td>
           </tr>
 
-          <tr>
-            <td> <div class = "pic"> </div> </td>
-            <td> Jack  </td>
-            <td> 9/8/2014 </td>
-            <td> 23123 Zanker Rd, San Jose, CA, 94009 </td>
-            <td> $19.33 </td>
-            <td> <p class = "link"><a href = ""> edit</p>  <p class = "link"><a href = ""> delete</p> </td>
-          </tr>
-
-          <tr>
-            <td> <div class = "pic"> </div> </td>
-            <td> Eric  </td>
-            <td> 8/8/2014 </td>
-            <td> 342 Jefferson Rd, San Francisco, CA, 94677 </td>
-            <td> $9.33 </td>
-            <td> <p class = "link"><a href = ""> edit</p>  <p class = "link"><a href = ""> delete</p> </td>
-          </tr>
-
+<?php
+      }
+?>
         </tbody>
       </table>
     </div>
