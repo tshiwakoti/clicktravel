@@ -46,7 +46,7 @@
   <body>
     <div id="container">
       <div id="header">
-        
+          <a id="cart" href="#">Cart (0)</a>   
         <!-- Pull from AJAX response where they clicked -->
 <?php
           if ($results['city_name'] == NULL){
@@ -56,7 +56,7 @@
           }
 ?>
         <!-- Cart link, ECHO number of items in cart -->
-        <a id="cart" href="#">Cart (0)</a>
+        
 
       </div>
     <div id="wrapper">
@@ -85,7 +85,7 @@
               <input type="submit" value="Add to Cart">
             </form>
             <p class="description">
-            <?= $city['description'] ?>
+            <?= $city['descr'] ?>
             </p>
             <div class="pics">
               Pictures
