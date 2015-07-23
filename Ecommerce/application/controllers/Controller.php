@@ -20,18 +20,11 @@ class Controller extends CI_Controller {
   }
 
 	public function processCoords(){
-		//SAVE NAME AND COORDINATES TO A VARIABLE
 		$post = $this->input->post();
 		//SEND COORDINATES TO MODEL FOR DB PROCESSING
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
-
-		//LOAD PARTIAL VIEW WITH RESULTS FROM DATABASE SEARCH
-		//$this->load->view('users/trips/partials', $)
-
 		$results = array('results' => $post, 'cities' => $cities);
-		//LOAD VIEW AND SEND IT THE VARIABLE WITH THE PLACE NAME
 		$this->load->view('users/trips', $results);
-
 
 	}
 
