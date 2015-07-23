@@ -10,6 +10,7 @@ class Controller extends CI_Controller {
 		$this->load->library('session');
 		$this->load->library('googlemaps');
 		$this->load->model('Model');
+		$this->load->helper('url');
 
 	}
 
