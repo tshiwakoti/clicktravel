@@ -16,6 +16,7 @@ class Controller extends CI_Controller {
 	 public function index()
 	{
 		$this->load->view('users/index');
+
   }
 
 	public function processCoords(){
@@ -23,9 +24,7 @@ class Controller extends CI_Controller {
 		//SEND COORDINATES TO MODEL FOR DB PROCESSING
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
 		$results = array('results' => $post, 'cities' => $cities);
-		
 		$this->load->view('users/trips', $results);
-		
 
 	}
 
