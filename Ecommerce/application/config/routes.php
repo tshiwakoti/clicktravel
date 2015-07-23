@@ -52,5 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-//$route['/Productscontroller/add'] ='addproduct';
+
+$route['destination'] = 'Controller/processCoords';
+$route['register'] = 'Controller/register';
+$route['login'] = 'Controller/login';
+$route['orders'] = 'Admins/displayOrders';
+$route['packages'] = 'Admins/displayPackages';
+$route['edit/(:any)'] = 'Admins/edit/$1';
+$route['editProcess/(:any)'] = 'Admins/editprocess/$1';
+$route['editPackage/(:any)'] = 'Admins/editPackage/$1';
+
 $route['processCoords'] = 'Controller/processCoords';

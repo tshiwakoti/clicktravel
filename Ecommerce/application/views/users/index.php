@@ -19,7 +19,14 @@
           center: { lat: 25.163, lng: -0.878 },
           mapTypeId: google.maps.MapTypeId.SATELLITE,
           disableDefaultUI: true
-        };  
+        };
+<?php
+        if ($errors) {
+?>  
+          $('#logAndReg').fadeToggle();
+<?php
+        }
+?>
 
 
       function getAddress(lat, lng) {
@@ -145,23 +152,22 @@
     </div>
     <div id="logAndReg">
       <h2>Welcome to Click 'n Bounce</h2>
+      <?= $errors ?>
       <form method="post" action="register">
         <div id="regLabels">
-          First Name:<br>
-          Last Name:<br>
+          Name:<br>
           Email:<br>
           Password:<br>
           Confirm Password:<br>
         </div>
         <div id="regInfo">
-          <input type="text" name="first_name"><br>
-          <input type="text" name="last_name"><br>
+          <input type="text" name="name"><br>
           <input type="text" name="email"><br>
           <input type="password" name="password"><br>
           <input type="password" name="passwordconf"><br>
-      </div>
-      <br>
-      <br>
+        </div>
+        <br>
+        <br>
         <input class="sub" type="submit" name="submit" value="Register">
       </form>
       <form method="post" action="login">
@@ -179,7 +185,7 @@
       </form>
     </div>
     <div id="map-canvas"></div>
-    <form id="coordinate_form" method="post" action="processCoords">
+    <form id="coordinate_form" method="post" action="destination">
       <input type="hidden" id="lat" name="lat">
       <input type="hidden" id="lng" name="lng">
       <input type="hidden" id="city_name" name="city_name">

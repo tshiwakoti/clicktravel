@@ -94,11 +94,27 @@
    } else {
 ?>
   <body>
+
     <div id="wrapper">
 
       <div id = "top">
         <nav>
           <div class="nav-wrapper">
+
+    <div id="container">
+      <div id="header">
+          <a id="cart" href="#">Cart (0)</a>
+        <!-- Pull from AJAX response where they clicked -->
+<?php
+          if ($results['city_name'] == NULL){
+            echo "<h2 id='title'>Destinations close to your click";
+          } else {
+            echo "<h2 id='title'>Destinations near " . $results['city_name'] . "</h2>";
+          }
+?>
+        <!-- Cart link, ECHO number of items in cart -->
+
+
 
 
                 <?php
@@ -134,10 +150,36 @@ function callInstagram($url)
 
      foreach ($cities as $city){
 ?>
+
   <div class = "city">
             <div class = "row">
             <div class="col s6">
               <h2><?= $city['name']. "<span> **** </span>" ?></h2>
+
+          <div class="display_city">
+            <h2><?= $city['name'] ?></h2>Click 'n Bounce User Rating:
+            <form id="select">
+              <select>
+                <option value="duration">Trip Duration</option>
+                <option value="four_day">4 Days $599</option>
+                <option value="ten_day">10 Days $1,199</option>
+              </select>
+              <select>
+                <option value="Quantity">Quantity</option>
+                <option value="onepack">1</option>
+                <option value="twopack">2</option>
+                <option value="threepack">3</option>
+                <option value="fourpack">4</option>
+                <option value="fivepack">5</option>
+              </select>
+              <input type="submit" value="Add to Cart">
+            </form>
+            <p class="description">
+            <?= $city['descr'] ?>
+            </p>
+            <div class="pics">
+              Pictures
+
             </div>
               <div class ="row">
                 <div class="col s3">
