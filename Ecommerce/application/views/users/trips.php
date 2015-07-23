@@ -87,7 +87,6 @@
       /*color: #2BBBAD;*/
       margin-top: 35px;
     }
-
     .city{
       margin-top: 30px;
       color: white;
@@ -112,6 +111,10 @@
     #title {
       margin: 0px auto;
       text-align: center;
+    }
+    .city_title {
+      border-top: 3px solid black;
+      border-bottom: 3px solid black;
     }
 
     </style>
@@ -155,7 +158,7 @@ function callInstagram($url)
   <div class = "city">
     <div class = "row">
     <div class="col s6">
-      <h2><?= $city['name']. "<span> **** </span>" ?></h2>
+      <h2 class="city_title"><?= $city['name']. "<span> **** </span>" ?></h2>
     </div>
       <div class ="row">
         <div class="col s3">
