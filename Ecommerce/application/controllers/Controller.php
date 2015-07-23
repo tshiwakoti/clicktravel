@@ -15,7 +15,6 @@ class Controller extends CI_Controller {
 		$this->load->helper('url');
 
 		$this->session->set_userdata('logged_in', false);
-		$this->output->enable_profiler();
 
 
 	}
