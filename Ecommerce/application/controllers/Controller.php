@@ -19,10 +19,6 @@ class Controller extends CI_Controller {
 		$data['map'] = $this->googlemaps->create_map();
 		$this->load->view('users/index');
 
-		//$this->load->view('/products/index', $data);
-		//$this->load->view('/products/countrycode_to_continent');
-		//$this->load->view('/products/getcountry');
-		//$this->load->view('/products/jsontophp');
   }
 
 	public function process()

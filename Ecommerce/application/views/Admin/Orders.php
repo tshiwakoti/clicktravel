@@ -32,6 +32,7 @@
       background-color: lightgray;
       border: 2px solid gray;
       font-size: 18px;
+      color: black;
     }
 
     #pagination{
@@ -51,13 +52,15 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="">Dashboard</a></li>
+          <li class = "active"><a href="">Dashboard</a></li>
           <li class="active"> <a href="">Orders</a></li>
-          <li><a href="file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/Products.html">Products</a></li>
+          <li><a href="/Admins/displaypackages">Products</a></li>
         </ul>
+
         <ul class="right hide-on-med-and-down">
-          <li><a href="">Log off</a></li>
+          <li><a href="/Admins/logoff">Log off</a></li>
         </ul>
+
       </div>
     </nav>
   </div>
@@ -118,33 +121,26 @@
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <td> <a href = "file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/show.html"> 101 </td>
-            <td> Bob </td>
-            <td> 9/6/2014 </td>
-            <td> 123 Zanker Rd, San Jose, CA, 94009 </td>
-            <td> $14.33 </td>
-            <td> Shipped</td>
-          </tr>
 
-          <tr>
-            <td> <a href = "file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/show.html">191 </td>
-            <td> Jack  </td>
-            <td> 9/8/2014 </td>
-            <td> 23123 Zanker Rd, San Jose, CA, 94009 </td>
-            <td> $19.33 </td>
-            <td> Order in process</td>
-          </tr>
+<?php
+      foreach ($orders as $order)
+      {
+?>
 
-          <tr>
-            <td> <a href = "file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/show.html"> 51 </td>
-            <td> Eric  </td>
-            <td> 8/8/2014 </td>
-            <td> 342 Jefferson Rd, San Francisco, CA, 94677 </td>
-            <td> $9.33 </td>
-            <td> Order in process</td>
-          </tr>
+        <tr>
+          <!-- <td> <a href = <?= "file:///Users/Abhi/Desktop/GitHub/Ecommerce-Project/Ecommerce/application/views/Admin/show.html"> 51 ?> </td> -->
+          <td> <a href = ""> <?= $order['id'] ?> </td>
+          <td> <?= $order['first_name'].$order['last_name'] ?> </td>
+          <td> <?= $order['created_at'] ?> </td>
+          <td> <?= $order['billingaddress'].$order['billingaddress2']. " , ".$order['billingcity']." , ".$order['billingstate']." , ".$order['billingzipcode']  ?> </td>
+          <td> <?= $order['price']?> </td>
+          <td> Order in process </td>
+        </tr>
+<?php
+      }
+
+?>
+
 
         </tbody>
       </table>
