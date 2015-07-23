@@ -14,7 +14,6 @@
     <script type="text/javascript">
       $(document).ready(function(){
         var map;
-
         var mapOptions = {
           zoom: 3,
           center: { lat: 16.103, lng: -22.803 },
@@ -29,11 +28,11 @@
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-              
               var city_name = results[1].formatted_address;
-              console.log(city_name);
-              $("#city_name").val(city_name);
+              $("input[name=city_name]").val(city_name);          
             }
+          } else {
+            $("input[name=city_name]").val("unknown location:");
           }
         });
       }
@@ -44,22 +43,17 @@
         google.maps.event.addListener(map, "click", function( event ) {
           var lat = event.latLng.A;
           var lng = event.latLng.F;
-          getAddress(lat, lng); 
+          getAddress(lat, lng);
           //Fill hidden form with coordinates and name
           $("input[name=lat]").val(lat);
-          $("#lng").val(lng);
-          $("#city_name").val(city_name);
-          //AUTO SUBMIT FORM        
-          setTimeout("$('#coordinate_form').submit()", 400);
+          $("input[name=lng").val(lng);
+          //$("#city_name").val(getAddress(lat, lng));
+          //AUTO SUBMIT FORM
+          setTimeout("$('#coordinate_form').submit()" , 800);
         });
-
-        // if ((dest)lat > .9(lat) && (dest)lat < 1.1(lat)){
-        //   if ((dest)lng > .9(lng) && (dest)lng < 1.1(lng)){
-
-        //   }
-        // }
       }
       google.maps.event.addDomListener(window, 'load', initialize);
+
       $("button").click(function(){
         $("#logAndReg").fadeToggle();
       });
@@ -89,16 +83,17 @@
         border-radius: 5px;
         height: 40px;
         width: 110px;
-        position: fixed;
+        position: absolute;
         left: 91%;
         margin-top: 5px;
       }
       #logAndReg{
-        position: fixed;
+        position: absolute;
+        left: 25%;
+        right: 25%;
+        top: 20%;
         z-index: 3;
-        left: 24%;
-        top: 22%;
-        width: 700px;
+        width: 50%;
         height: 500px;
         background-color: black;
         display: none;
