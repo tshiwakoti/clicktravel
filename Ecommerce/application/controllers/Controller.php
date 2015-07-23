@@ -24,11 +24,16 @@ class Controller extends CI_Controller {
 
 	public function processCoords(){
 		$post = $this->input->post();
-		//SEND COORDINATES TO MODEL FOR DB PROCESSING
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
 		$results = array('results' => $post, 'cities' => $cities);
 		$this->load->view('users/trips', $results);
+<<<<<<< HEAD
 
+=======
+	}
+	public function checkout(){
+		$this->load->view('users/checkout');
+>>>>>>> clickbranch
 	}
 
 	public function register(){
