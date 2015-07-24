@@ -50,8 +50,6 @@ class Controller extends CI_Controller {
 	public function returnToTrips(){
 		$this->load->view("users/trips");
 	}
-
-
 	public function register(){
 		$this->Model->register($this->input->post());
 		redirect('/');
