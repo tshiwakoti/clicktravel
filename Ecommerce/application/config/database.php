@@ -67,6 +67,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'root',
+	'password' => 'root',
 	'database' => 'clicktravel',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

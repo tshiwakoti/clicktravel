@@ -48,13 +48,20 @@ class Controller extends CI_Controller {
 		$this->load->view("users/itinerary", $post);
 	}
 	public function returnToTrips(){
-		$this->load->view("users/trips");
+		$post = $this->session->userdata();
+		var_dump($post);
+		die();
+		$latLngSess = array('lat' => $post['lat'], 'lng' => $post['lng']);
+		$this->session->set_userdata('post', $latLngSess);
+		$cities = $this->Model->getCities($post['lat'], $post['lng']);
+		$results = array('results' => $post, 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
+		$this->load->view('users/trips', $results);
 	}
+
 	public function confirmation(){
 		$this->load->view('users/confirmation', array('post' => $this->session->userdata('post'), 'dest' => $this->session->userdata('city_name')));
 	}
-
-
+	
 	public function register(){
 		$this->Model->register($this->input->post());
 		redirect('/');
