@@ -62,28 +62,53 @@
     margin-left: 100px;
   }
 
-  #userinfo{
-    width: 500px;
-    border: 1px solid grey;
-  }
+ 
   
 
   #search {
     width: 900px;
     margin-left: 100px;
-    border: 1px solid grey;
+    
   }
   #getinfo{
-    width: 900px;
+    width: auto;
     height: 40px;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
+    margin-left: 300px;
+  }
+
+.gsc-control
+{
+  margin-left: 400px;
+  width: 500px;
+}
+
+
+  .gsc-search-box
+  {
+    margin-left: 300px;
   }
 
   .gsc-result-info-container
   {
+    margin-left: 600px;
+    display: none;
+  }
+
+  .gsc-tabsArea
+  {
     margin-left: 400px;
+    width: 700px;
+
+  }
+
+  .gsc-result-info{
+    display: none;
   }
   
+  .gsc-above-wrapper-area{
+    display: none;
+  }
 
   }
   #searchcontrol
@@ -102,7 +127,7 @@
 
   .gsc-results, .gsc-resultsRoot, .gsc-control
   {
-    width: 800px;
+    width: 1000px;
     margin-left: 20px;
   }
   .spam{
