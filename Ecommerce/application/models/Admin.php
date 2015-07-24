@@ -4,7 +4,7 @@ class Admin extends CI_Model {
 
   public function getorders()
   {
-    $query = "SELECT orders.id, orders.name, orders.depdate, orders.retdate, orders.billadd, orders.billadd2, orders.billcity, 
+    $query = "SELECT orders.id, orders.depdate, orders.retdate, orders.billadd, orders.billadd2, orders.billcity, 
                      orders.billstate, orders.billzip, orders.user_id, orders.status, orders.qty, packages.price, 
                      orders.created_at, orders.updated_at FROM orders
               JOIN packages
@@ -87,12 +87,12 @@ class Admin extends CI_Model {
 
   public function get_orders_by_key($post){
     $key = $post['search'];
-    $query = "SELECT orders.id, orders.name, orders.depdate, orders.retdate, orders.billadd, orders.billadd2, orders.billcity, 
+    $query = "SELECT orders.id, orders.depdate, orders.retdate, orders.billadd, orders.billadd2, orders.billcity, 
                      orders.billstate, orders.billzip, orders.user_id, orders.status, orders.qty, packages.price, 
                      orders.created_at, orders.updated_at FROM orders
               JOIN packages
               ON orders.package_id = packages.id
-              WHERE orders.id LIKE '%{$key}%' OR orders.name LIKE '%{$key}%' OR orders.depdate LIKE '%{$key}%' OR 
+              WHERE orders.id LIKE '%{$key}%' OR orders.depdate LIKE '%{$key}%' OR 
               orders.retdate LIKE '%{$key}%' OR orders.billadd LIKE '%{$key}%' OR orders.billcity LIKE '%{$key}%' OR 
               orders.billstate LIKE '%{$key}%' OR orders.billzip LIKE '%{$key}%' OR orders.user_id LIKE '%{$key}%' OR 
               orders.status LIKE '%{$key}%' OR orders.qty LIKE '%{$key}%' OR packages.price LIKE '%{$key}%' OR 

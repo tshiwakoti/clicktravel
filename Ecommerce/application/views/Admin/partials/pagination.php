@@ -1,4 +1,4 @@
-	<ul class="pagination col s6 offset-s3">
+	<ul class="pagination col s7 offset-s3">
 		<li 
 <?php
 		if ($current == 1) {

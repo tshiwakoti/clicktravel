@@ -169,7 +169,6 @@
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Name</th>
             <th>Dep. Date</th>
             <th>Ret. Date</th>
             <th>Billing Address</th>

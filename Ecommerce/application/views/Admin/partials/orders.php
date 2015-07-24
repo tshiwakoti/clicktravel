@@ -4,7 +4,6 @@
 ?>
       <tr>       
         <td> <?= $order['id'] ?> </td>
-        <td> <?= $order['name'] ?> </td>
         <td><?= date_format(date_create($order['depdate']), 'F j, Y') ?></td>
         <td><?= date_format(date_create($order['retdate']), 'F j, Y') ?></td>
         <td> <?= $order['billadd'].$order['billadd2']. ", ".$order['billcity'].", ".$order['billstate']." ".$order['billzip']  ?> </td>
