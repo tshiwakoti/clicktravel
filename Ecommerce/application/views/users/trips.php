@@ -164,7 +164,7 @@ function callInstagram($url)
 
           </div>
             <p id="description">
-            <?= $city['description'] ?>
+            <?= $city['descr'] ?>
             </p>
 
 
