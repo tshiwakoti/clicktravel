@@ -20,7 +20,7 @@ class Model extends CI_Model {
 	public function getCities($latitude, $longitude)
 	{
 		$query = "SELECT name, descr FROM cities
-					WHERE ({$latitude} > lat-10 AND {$latitude} < lat+10) AND ({$longitude} > lng-10 AND {$longitude} < lng+10);";
+					WHERE ({$latitude} > lat-12 AND {$latitude} < lat+12) AND ({$longitude} > lng-12 AND {$longitude} < lng+12);";
 		return $this->db->query($query)->result_array();
 	}
 
@@ -41,9 +41,13 @@ class Model extends CI_Model {
 			return false;
 		}
 	}
-	// public function newOrder(){
-	// 	$query = "INSERT INTO orders"
-	// }
+	public function newOrder($newOrd){
+	 	$query = "INSERT INTO orders (billadd, billadd2, billcity, billstate, billzip, shipadd, shipadd2, shipcity, shipstate, shipzip, card, exp, cvv, depdate, retdate, qty, status, user_id, created_at, updated_at, package_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?);";
+
+	 	$values = array($newOrd['bill_address'], $newOrd['bill_address2'], $newOrd['bill_city'], $newOrd['bill_state'], $newOrd['bill_zipcode'], $newOrd['address'], $newOrd['address2'], $newOrd['city'], $newOrd['state'], $newOrd['zipcode'], $newOrd['ccnumber'], $newOrd['cvv'], $newOrd['exp_month'], 2015-07-21, 2015-07-21, 4, 'processed', 1, 2);
+
+	 	return $this->db->query($query, $values);
+	}
 
  }
  ?>

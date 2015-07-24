@@ -53,7 +53,7 @@
           getAddress(lat, lng);
           //Fill hidden form with coordinates and name
           $("input[name=lat]").val(lat);
-          $("input[name=lng").val(lng);
+          $("input[name=lng]").val(lng);
           //AUTO SUBMIT FORM
           setTimeout("$('#coordinate_form').submit()" , 500);
         });
@@ -79,8 +79,7 @@
         position: absolute;
         z-index: 3;
         font-family: sans-serif;
-        background-color: black;
-        opacity: 0.5;
+        background-color: rgba(0,0,0,.5);
       }
       button{
         color: white;
@@ -101,9 +100,8 @@
         z-index: 3;
         width: 50%;
         height: 500px;
-        background-color: black;
+        background-color: rgba(0,0,0,.5);
         display: none;
-        opacity: 0.5;
         border: 1px solid silver;
         border-radius: 10px;
         color: white;

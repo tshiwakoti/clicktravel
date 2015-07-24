@@ -120,41 +120,41 @@ $(document).ready(function() {
     $('#submitBtn').attr('disabled', 'disabled');
     var error = false;
 
-// Get the values:
-var ccNum = $('.card-number').val(),
-cvcNum = $('.card-cvc').val(),
-expMonth = $('.card-expiry-month').val(),
-expYear = $('.card-expiry-year').val();
+    // Get the values:
+    var ccNum = $('.card-number').val(),
+    cvcNum = $('.card-cvc').val(),
+    expMonth = $('.card-expiry-month').val(),
+    expYear = $('.card-expiry-year').val();
 
-// Validate the number:
-if (!Stripe.card.validateCardNumber(ccNum)) {
-  error = true;
-  reportError('The credit card number appears to be invalid.');
-}
+    // Validate the number:
+    if (!Stripe.card.validateCardNumber(ccNum)) {
+      error = true;
+      reportError('The credit card number appears to be invalid.');
+    }
 
-// Validate the CVC:
-if (!Stripe.card.validateCVC(cvcNum)) {
-  error = true;
-  reportError('The CVC number appears to be invalid.');
-}
+    // Validate the CVC:
+    if (!Stripe.card.validateCVC(cvcNum)) {
+      error = true;
+      reportError('The CVC number appears to be invalid.');
+    }
 
-// Validate the expiration:
-if (!Stripe.card.validateExpiry(expMonth, expYear)) {
-  error = true;
-  reportError('The expiration date appears to be invalid.');
-}
-if (!error) {
-    // Get the Stripe token:
-    Stripe.card.createToken({
-        number: ccNum,
-        cvc: cvcNum,
-        exp_month: expMonth,
-        exp_year: expYear
-    }, stripeResponseHandler);
- }
-return false;
-});
-});
+    // Validate the expiration:
+    if (!Stripe.card.validateExpiry(expMonth, expYear)) {
+      error = true;
+      reportError('The expiration date appears to be invalid.');
+    }
+    if (!error) {
+        // Get the Stripe token:
+        Stripe.card.createToken({
+          number: ccNum,
+          cvc: cvcNum,
+          exp_month: expMonth,
+          exp_year: expYear
+        }, stripeResponseHandler);
+      }
+      return false;
+    });
+  });
 </script>
 </head>
 <body>
@@ -164,6 +164,7 @@ return false;
   <div id="cart">
     Item(s) currently in your cart<br>
     <p>(<?= $ord['quantity']?>) <?= $ord['pickPack'] ?> Day Package(s) to <?= $ord['name'] ?></p>
+    <a href="/" id="map">Return to the map  </a><a href="/Controller/returnToTrips" id="trips">  Back to city selection </a>
 
   </div>
   <form id="payment-form" action="checkout.php" method="POST">
