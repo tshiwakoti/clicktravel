@@ -29,7 +29,7 @@
   margin-bottom: 80px;
   margin-top: 60px;
 }
-#payment-form{
+#shipping{
   width: 450px;
   height: 500px;
   background-color: rgba(0,0,0,.5);
@@ -110,9 +110,30 @@
   text-align: center;
   padding: 10px;
 }
+a:hover {
+  color: orange;
+}
+a {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+}
+a#map {
+  margin-right: 100px;
+  vertical-align: top;
+}
+a#trips {
+  margin-left: 100px;
+  vertical-align: top;
+}
 
 #submitBtn{
   padding: 10px;
+}
+
+#billing, #shipping{
+  display: inline-block;
 }
 </style>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -162,106 +183,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC-
 //     });
 //   });
 // </script>
-    <style>
-        #checkout{
-          width: 450px;
-          height: 500px;
-          background-color: rgba(0,0,0,.5);
-          border: 3px solid yellow;
-          border-radius: 10px;
-          font-family: sans-serif;
-          margin: 0px auto;
-          display: inline-block;
-          vertical-align: top;
-          margin-top: 50px;
-          margin-right: 50px;
-        }
-        #checkout form{
-          margin-top: 40px;
-          display: inline-block;
-          vertical-align: top;
-        }
-        #checkout input{
-          background-color: black;
-          margin: 3px;
-          display: inline-block;
-          color: white;
-          line-height: 0px; 
-          text-align: center;
-        }
-        #checkout #checkoutLabels, #checkoutInfo{
-          display: inline-block;
-        }
-        #checkout #checkoutLabels{
-          text-align: right;
-          line-height: 26px;
-        }
-        #billing{
-          width: 450px;
-          height: 620px;
-          background-color: rgba(0,0,0,.5);
-          border: 3px solid hotpink;
-          border-radius: 10px;
-          font-family: sans-serif;
-          margin: 0px auto;
-          display: inline-block;
-        }
-        #billing form{
-          margin-top: 40px;
-          display: inline-block;
-          vertical-align: top;
-        }
-        #billing input{
-          background-color: black;
-          margin: 3px;
-          display: inline-block;
-          color: white;
-          line-height: 0px; 
-          text-align: center;
-        }
-        #billingLabels {
-          vertical-align: top;
-        }
-        /*#billingLabels p*/
-        #billing #billingLabels, #billingInfo{
-          display: inline-block;
-        }
-        #billing #billingLabels{
-          text-align: right;
-          line-height: 26px;
-        }
-        #paynow {
-          height: 30px;
-          width: 90px;
-          border-radius: 10px;
-        }
-        #cart {
-          width: 800px;
-          background-color: rgba(0,0,0,.5);
-          border-radius: 10px;
-          border: 3px solid limegreen;
-          margin: 0px auto 40px auto;
-          text-align: center;
-          padding: 10px;
-        }
-        a:hover {
-          color: orange;
-        }
-        a {
-          color: white;
-          text-decoration: none;
-          text-align: center;
-          font-size: 14px;
-        }
-        a#map {
-          margin-right: 100px;
-          vertical-align: top;
-        }
-        a#trips {
-          margin-left: 100px;
-          vertical-align: top;
-        }
-    </style>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC--bZJDGwk">
@@ -384,64 +305,63 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC-
 
   </div>
   <div id="payment-errors"></div>
-  <div id="payment-form">
-    <h2>Shipping Information</h2>
-    <form action="confirmation" method="post">
-      <div id="checkoutLabels">
-        <p>First Name:</p>
-        <p>Last Name:</p>
-        <p>Address:</p>
-        <p>Address 2:</p>
-        <p>City:</p>
-        <p>State:</p>
-        <p>Zipcode:</p>
-      </div>
-      <div id="checkoutInfo">
-        <p><input type="text" name="first_name" id="fn"></p>
-        <p><input type="text" name="last_name" id="ln"></p>
-        <p><input type="text" name="address" id="a"></p>
-        <p><input type="text" name="address2" id="a2"></p>
-        <p><input type="text" name="city" id="c"></p>
-        <p><input type="text" name="state" id="s"></p>
-        <p><input type="text" name="zipcode" id="z"></p>
-      <!-- </form> -->
-    </div>
 
-
-
-
-
-
-
-    <div id="billing">
-      <h2>Billing Information</h2>
-      <p>Same as shipping<input type="checkbox" id="box"></p>
-      <div id="billingLabels">
-        <p>First Name:</p>
-        <p>Last Name:</p>
-        <p>Address:</p>
-        <p>Address 2:</p>
-        <p>City:</p>
-        <p>State:</p>
-        <p>Zipcode:</p>
-        <p><label>Card Number:</label></p>
-        <p><label>CVC:</label></p>
-        <p><label>Expiration Date (MM:YYY):</label>:</p>
-      </div>
-      <div id="billingInfo">
-        <p><input type="text" name="bill_first_name" id="bfn"></p>
-        <p><input type="text" name="bill_last_name" id="bln"></p>
-        <p><input type="text" name="bill_address" id="ba"></p>
-        <p><input type="text" name="bill_address2" id="ba2"></p>
-        <p><input type="text" name="bill_city" id="bc"></p>
-        <p><input type="text" name="bill_state" id="bs"></p>
-        <p><input type="text" name="bill_zipcode" id="bz"></p>
-        <p><input type="text" size="20" autocomplete="off" id="cc"></p>
-        <p><input type="text" size="4" automplete="off" id="cvv"></p>
-        <p><input type="text" size="2">
-        <span> / </span>
-        <input type="text" size="4"></p>
+    <div id="payment-form">
+      
+      <form action="confirmation" method="post">
+        <div id="shipping">
+          <h2>Shipping Information</h2> 
+          <div id="checkoutLabels">
+            <p>First Name:</p>
+            <p>Last Name:</p>
+            <p>Address:</p>
+            <p>Address 2:</p>
+            <p>City:</p>
+            <p>State:</p>
+            <p>Zipcode:</p>
+          </div>
+          <div id="checkoutInfo">
+            <p><input type="text" name="first_name" id="fn"></p>
+            <p><input type="text" name="last_name" id="ln"></p>
+            <p><input type="text" name="address" id="a"></p>
+            <p><input type="text" name="address2" id="a2"></p>
+            <p><input type="text" name="city" id="c"></p>
+            <p><input type="text" name="state" id="s"></p>
+            <p><input type="text" name="zipcode" id="z"></p>
+          </div>
+        </div>  
+        <div id="billing">
+          <h2>Billing Information</h2>
+          <p>Same as shipping<input type="checkbox" id="box"></p>
+          <div id="billingLabels">
+            <p>First Name:</p>
+            <p>Last Name:</p>
+            <p>Address:</p>
+            <p>Address 2:</p>
+            <p>City:</p>
+            <p>State:</p>
+            <p>Zipcode:</p>
+            <p><label>Card Number:</label></p>
+            <p><label>CVC:</label></p>
+            <p><label>Expiration Date (MM:YYY):</label>:</p>
+          </div>
+          <div id="billingInfo">
+            <p><input type="text" name="bill_first_name" id="bfn"></p>
+            <p><input type="text" name="bill_last_name" id="bln"></p>
+            <p><input type="text" name="bill_address" id="ba"></p>
+            <p><input type="text" name="bill_address2" id="ba2"></p>
+            <p><input type="text" name="bill_city" id="bc"></p>
+            <p><input type="text" name="bill_state" id="bs"></p>
+            <p><input type="text" name="bill_zipcode" id="bz"></p>
+            <p><input type="text" size="20" autocomplete="off" id="cc"></p>
+            <p><input type="text" size="4" automplete="off" id="cvv"></p>
+            <p><input type="text" size="2">
+            <span> / </span>
+            <input type="text" size="4"></p>
+            <input type="submit" value="Submit Order" id="submitBtn">
+          </div>
+        </div>
       </form>
     </div>
   </body>
-  </html>
+</html>
