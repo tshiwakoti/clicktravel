@@ -22,7 +22,6 @@ class Controller extends CI_Controller {
 	 public function index()
 	{
 		$this->load->view('users/index', array('errors' => $this->session->flashdata('errors')));
-
   }
 
 	public function processCoords(){
@@ -30,12 +29,13 @@ class Controller extends CI_Controller {
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
 		$results = array('results' => $post, 'cities' => $cities);
 		$this->load->view('users/trips', $results);
-
 	}
 	public function checkout(){
-		$this->load->view('users/checkout');
+		$order = $this->input->post();
+		$orderArr = array('ord' => $order);
+		$this->load->view('users/checkout', $orderArr);
 
-	}
+	}	
 
 	public function register(){
 		$this->Model->register($this->input->post());
@@ -63,4 +63,9 @@ class Controller extends CI_Controller {
 		redirect('/');
 	}
 
+	public function submitPayment(){
+		//$bill = $this->Model->newOrder($this->input->post());
+		//$post = array('info' => $bill);
+		//$this->load->view("users/itinerary", $post);
+	}
 }

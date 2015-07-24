@@ -61,6 +61,8 @@
     #dropdown
     {
       margin-top: 35px;
+      text-align: center;
+      padding: 0px;
     }
 
     .descr
@@ -116,6 +118,37 @@
       border-top: 3px solid black;
       border-bottom: 3px solid black;
     }
+    #addcart{
+      background-color: hotpink;
+      color: white;
+      height: 38px;
+      width: 200px;
+    /*  position: relative;
+      bottom: 50px;
+      left: 230px;*/
+    }
+    #quantity{
+      margin-top: 35px;
+      text-align: center;
+      display: inline-block;
+   /*   position: relative;
+      top: 45px;
+      right: 265px;*/
+    }
+    #return{
+      text-decoration: none;
+      text-align: center;
+      color: white;
+      margin: 0px auto;
+    }
+    a:hover {
+      color: orange;
+    }
+    #footer a {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
 
     </style>
 
@@ -135,6 +168,7 @@
             }
           ?>
           <div id="content">
+            <a href="/" id="return">Back to the Map!</a>
 <?php
 
 function callInstagram($url)
@@ -157,67 +191,76 @@ function callInstagram($url)
 ?>
   <div class = "city">
     <div class = "row">
-    <div class="col s6">
-      <h2 class="city_title"><?= $city['name']. "<span> **** </span>" ?></h2>
-    </div>
-      <div class ="row">
-        <div class="col s3">
-          <div id = "dropdown">
-            <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Select Package</a>
-                <ul id='dropdown1' class='dropdown-content'>
-                  <li><a href="#!">4 Days $599</a></li>
-                  <li><a href="#!">10 Days $1199</a></li>
-                </ul>
-          </div>
-        </div>
-
-        <div class="col s2">
-          <a id = "addcart" class="waves-effect waves-light btn">Purchase</a> <br>
-        </div>
+      <div class="col s6">
+        <h2 class="city_title"><?= $city['name']. "<span> **** </span>" ?></h2>
       </div>
+        <div class ="row">
+          <div class="col s3">
+            <div id = "dropdown">
 
+              <form action="Controller/checkout" method="post">
+                <select name="pickPack" class='dropdown-button btn' data-activates='dropdown1'>
+                  <option>PACKAGES</option>
+                  <option value="4">4 Days $599</option>
+                  <option value="10">10 Days $1199</option>
+                </select>
+              </div>
+            </div>
+            <div id="quantity">
+                <select name="quantity"class='dropdown-button btn' data-activates='dropdown1'>
+                  <option>QUANTITY</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col s2">
+              <input type="hidden" name="name" value="<?=$city['name']?>">
+              <input type="submit" value="PURCHASE" id="addcart"><br>
+            </form>
+            </div>
           </div>
-          <div class="descr">
-            
-            <?= $city['descr'] ?>
-            
+        </div>
+        <div class="descr">    
+            <?= $city['descr'] ?>  
           </div>
-
-
-  <div class="pics">
+        <div class="pics">
 <?php
   
-  $tag = preg_replace('/\s+/', '', str_replace(",", "", (str_replace(".", "", $city['name']))));
-  $client_id = "647fe4705228477691c07541f36e66d7";
-  $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.$client_id;
+          $tag = preg_replace('/\s+/', '', str_replace(",", "", (str_replace(".", "", $city['name']))));
+          $client_id = "647fe4705228477691c07541f36e66d7";
+          $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.$client_id;
 
-  $inst_stream = callInstagram($url);
-  $results = json_decode($inst_stream, true);
+          $inst_stream = callInstagram($url);
+          $results = json_decode($inst_stream, true);
 
-  //Now parse through the $results array to display your results...
-  $amount = 0;
-  foreach($results['data'] as $item){
-    if ($amount > 5)
-    {
-      break;
-
-    }
-    $amount +=1;
-      $image_link = $item['images']['low_resolution']['url'];
-      echo "<div id = 'igimage'>";
-      echo '<img src="'.$image_link.'" />';
-      echo "</div>";
-
+          //Now parse through the $results array to display your results...
+          $amount = 0;
+          foreach($results['data'] as $item){
+            if ($amount > 5)
+            {
+              break;
+            }
+            $amount +=1;
+          $image_link = $item['images']['low_resolution']['url'];
+          echo "<div id = 'igimage'>";
+          echo '<img src="'.$image_link.'" />';
+          echo "</div>";
   }
 
 ?>
-  </div>
+        </div>
 <?php
          }
 ?>
+      </div>
+      <div id="footer">
+        <a href="#">About Us</a>  |  <a href="#">Contact Us</a>  |  <a href="/" id="return">Back to the Map!</a>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
-  </body>
+</body>
 <?php } ?>
 </html>
