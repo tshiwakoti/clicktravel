@@ -107,6 +107,23 @@
           text-align: center;
           padding: 10px;
         }
+        a:hover {
+          color: orange;
+        }
+        a {
+          color: white;
+          text-decoration: none;
+          text-align: center;
+          font-size: 14px;
+        }
+        a#map {
+          margin-right: 100px;
+          vertical-align: top;
+        }
+        a#trips {
+          margin-left: 100px;
+          vertical-align: top;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript"
@@ -122,6 +139,7 @@
   <div id="cart">
     Item(s) currently in your cart<br>
     <p>(<?= $ord['quantity']?>) <?= $ord['pickPack'] ?> Day Package(s) to <?= $ord['name'] ?></p>
+    <a href="/" id="map">Return to the map  </a><a href="/Controller/returnToTrips" id="trips">  Back to city selection </a>
 
   </div>
   <div id="checkout">

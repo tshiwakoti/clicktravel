@@ -152,6 +152,14 @@
     #footer{
       margin-top: 40px;
     }
+    #content a:hover {
+      color: orange;
+    }
+    #content a {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
     </style>
 
   </head>
