@@ -15,7 +15,6 @@ class Controller extends CI_Controller {
 		$this->load->helper('url');
 
 		$this->session->set_userdata('logged_in', false);
-		$this->output->enable_profiler();
 
 
 	}
@@ -23,20 +22,27 @@ class Controller extends CI_Controller {
 	 public function index()
 	{
 		$this->load->view('users/index', array('errors' => $this->session->flashdata('errors')));
-
   }
 
 	public function processCoords(){
 		$post = $this->input->post();
+		$this->session->set_userdata('post', $post);
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
-		$results = array('results' => $post, 'cities' => $cities);
+		$results = array('results' => $post, 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
 		$this->load->view('users/trips', $results);
-
 	}
 	public function checkout(){
-		$this->load->view('users/checkout');
-
-	}
+		$order = $this->input->post();
+		if (count($order) == 3) {
+			$orderArr = array('ord' => $order);
+			$this->load->view('users/checkout', $orderArr);
+		} else {
+			$this->session->set_flashdata('errors', '<p>Please enter a valid package/quantity before purchasing.</p>');
+			$cities = $this->Model->getCities($this->session->userdata('post')['lat'], $this->session->userdata('post')['lng']);
+			$results = array('results' => $this->session->userdata('post'), 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
+			$this->load->view('users/trips', $results);
+		}
+	}	
 
 	public function register(){
 		$this->Model->register($this->input->post());
@@ -64,4 +70,9 @@ class Controller extends CI_Controller {
 		redirect('/');
 	}
 
+	public function submitPayment(){
+		//$bill = $this->Model->newOrder($this->input->post());
+		//$post = array('info' => $bill);
+		//$this->load->view("users/itinerary", $post);
+	}
 }

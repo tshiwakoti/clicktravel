@@ -63,3 +63,4 @@ $route['editProcess/(:any)'] = 'Admins/editprocess/$1';
 $route['editPackage/(:any)'] = 'Admins/editPackage/$1';
 
 $route['processCoords'] = 'Controller/processCoords';
+$route['checkout'] = 'Controller/checkout';

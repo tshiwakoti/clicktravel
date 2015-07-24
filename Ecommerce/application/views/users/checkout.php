@@ -7,6 +7,20 @@
         margin: 0; 
         padding: 0; 
         text-align: center;
+        background: #000 url(../images/body_bg_new.jpg) repeat fixed center top;
+        background-image: url(http://www.css3maker.com/images/body_bg_new.jpg);
+        background-position-x: 50%;
+        background-position-y: 0%;
+        background-size: initial;
+        background-repeat-x: repeat;
+        background-repeat-y: repeat;
+        background-attachment: fixed;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        font-family: sans-serif;
+      }
       }
       #header {
         margin-bottom: 80px;
@@ -15,13 +29,15 @@
         #checkout{
           width: 450px;
           height: 500px;
-          background-color: gray;
-          border: 1px solid black;
+          background-color: rgba(0,0,0,.5);
+          border: 3px solid yellow;
           border-radius: 10px;
           font-family: sans-serif;
           margin: 0px auto;
           display: inline-block;
           vertical-align: top;
+          margin-top: 50px;
+          margin-right: 50px;
         }
         #checkout form{
           margin-top: 40px;
@@ -34,19 +50,20 @@
           display: inline-block;
           color: white;
           line-height: 0px; 
+          text-align: center;
         }
         #checkout #checkoutLabels, #checkoutInfo{
           display: inline-block;
         }
         #checkout #checkoutLabels{
           text-align: right;
-          line-height: 27px;
+          line-height: 26px;
         }
         #billing{
           width: 450px;
           height: 620px;
-          background-color: gray;
-          border: 1px solid black;
+          background-color: rgba(0,0,0,.5);
+          border: 3px solid hotpink;
           border-radius: 10px;
           font-family: sans-serif;
           margin: 0px auto;
@@ -63,6 +80,7 @@
           display: inline-block;
           color: white;
           line-height: 0px; 
+          text-align: center;
         }
         #billingLabels {
           vertical-align: top;
@@ -73,12 +91,21 @@
         }
         #billing #billingLabels{
           text-align: right;
-          line-height: 27px;
+          line-height: 26px;
         }
         #paynow {
           height: 30px;
           width: 90px;
           border-radius: 10px;
+        }
+        #cart {
+          width: 800px;
+          background-color: rgba(0,0,0,.5);
+          border-radius: 10px;
+          border: 3px solid limegreen;
+          margin: 0px auto 40px auto;
+          text-align: center;
+          padding: 10px;
         }
     </style>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -86,18 +113,20 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC--bZJDGwk">
     </script>
     <script type="text/javascript">
-      $(document).ready(function(){
-
-      });
     </script>
   </head>
   <body>
   <div id="header">
-    <h1>Checkout</h1>
+    <h1>Checkout 'n Bounce</h1>
+  </div>
+  <div id="cart">
+    Item(s) currently in your cart<br>
+    <p>(<?= $ord['quantity']?>) <?= $ord['pickPack'] ?> Day Package(s) to <?= $ord['name'] ?></p>
+
   </div>
   <div id="checkout">
     <h2>Shipping Information</h2>
-    <form action="/#/#" method="post">
+    <form action="/Controller/submitPayment" method="post">
       <div id="checkoutLabels">
         <p>First Name:</p>
         <p>Last Name:</p>
@@ -120,7 +149,7 @@
     </div>
     <div id="billing">
       <h2>Billing Information</h2>
-      <p>Same as shipping<input type="radio"></p>
+      <p>Same as shipping<input type="checkbox"></p>
       <div id="billingLabels">
         <p>First Name:</p>
         <p>Last Name:</p>

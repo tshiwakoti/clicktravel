@@ -40,8 +40,10 @@ class Model extends CI_Model {
 			$this->session->set_flashdata('errors', validation_errors());
 			return false;
 		}
-
 	}
+	// public function newOrder(){
+	// 	$query = "INSERT INTO orders"
+	// }
 
  }
  ?>
