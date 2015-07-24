@@ -7,20 +7,13 @@ class Admins extends CI_Controller {
 		parent::__construct();
 		$this->load->library('session');
     $this->load->model('Admin');
+  }
 
-
-	}
-
-	 public function index()
-	{
-    //$this->load->view('/Admin/login');
-
-    if ($this->session->userdata("logged_in") == true)
-    {
+  public function index(){
+    $this->session->set_userdata('current', 1);
+    if ($this->session->userdata("logged_in") == true){
       redirect('Admins/displayorders');
-    }
-    else
-    {
+    } else {
       $this->load->view('/Admin/login');
     }
   }
@@ -28,23 +21,14 @@ class Admins extends CI_Controller {
 
   public function login()
   {
-    //var_dump($this->input->post());
     $is_logged = $this->Admin->login($this->input->post());
 
 
-  if($is_logged){
-    // $this->session->set_userdata('id', $is_logged['id']);
-    // $this->session->set_userdata('name', $is_logged['name']);
-    $this->session->set_userdata('email', $is_logged['email']);
-    $this->session->set_userdata("logged_in", true);
-    redirect('/');
-  }
-
-  // else
-  // {
-  //   $this->load->view('/Admin/login');
-  //
-  // }
+    if($is_logged){
+      $this->session->set_userdata('email', $is_logged['email']);
+      $this->session->set_userdata("logged_in", true);
+      redirect('/');
+    }
   }
 
   public function displayorders()
@@ -56,10 +40,11 @@ class Admins extends CI_Controller {
 
   public function displaypackages()
   {
-    $packages = $this->Admin->getpackages();
+    $packages = $this->Admin->get_trim_packages(0);
     $this->load->view('/Admin/products', array('packages' => $packages));
   }
 
+  
 
   public function logoff()
   {
@@ -91,8 +76,14 @@ class Admins extends CI_Controller {
   }
 
   public function allProducts(){
-    $products = $this->Admin->getpackages();
+    $products = $this->Admin->get_trim_packages(0);
     $this->load->view('admin/partials/packages', array('packages' => $products));
+  }
+
+  public function defaultPagination(){
+    $this->session->set_userdata('current', 1);
+    $products = $this->Admin->getpackages();
+    $this->load->view('admin/partials/pagination', array('packages' => $products, 'current' => 1));
   }
 
   public function newPackage(){
@@ -102,14 +93,12 @@ class Admins extends CI_Controller {
 
   public function newPackageProcess(){
     $this->Admin->add_package($this->input->post());
-    $products = $this->Admin->getpackages();
-    $this->load->view('admin/partials/packages', array('packages' => $products));
+    $this->pagedResultsSolo($this->session->userdata('current'));
   }
 
   public function deletePackage(){
     $this->Admin->delete_package($this->input->post());
-    $products = $this->Admin->getpackages();
-    $this->load->view('admin/partials/packages', array('packages' => $products));
+    $this->pagedResultsSolo($this->session->userdata('current'));
   }
 
   public function editPackage($id){
@@ -120,12 +109,11 @@ class Admins extends CI_Controller {
 
   public function editPackageProcess(){
     $this->Admin->edit_package($this->input->post());
-    $products = $this->Admin->getpackages();
-    $this->load->view('admin/partials/packages', array('packages' => $products));
+    $this->pagedResultsSolo($this->session->userdata('current'));
   }
 
   public function searchPackages(){
-    $results = $this->Admin->get_packages_by_key($this->input->post());
+    $results = $this->Admin->get_trim_packages_by_key($this->input->post('search'), 0);
     $this->load->view('admin/partials/packages', array('packages' => $results));
   }
 
@@ -133,7 +121,40 @@ class Admins extends CI_Controller {
     $results = $this->Admin->get_orders_by_key($this->input->post());
     $this->load->view('admin/partials/orders', array('orders' => $results));
   }
+
+  public function pagination($current){
+    $this->session->set_userdata('current', $current);
+    $results = $this->Admin->get_packages_by_key($this->input->post('search'));
+    $this->load->view('admin/partials/pagination', array('packages' => $results, 'current' => 1));
+  }
+
+  public function pagedResults($current, $query){
+    $results = $this->Admin->get_trim_packages_by_key($query, 10 * ($current-1));
+    $this->load->view('admin/partials/packages', array('packages' => $results));
+  }
+
+  public function pagedPagination($current, $query){
+    $this->session->set_userdata('current', $current);
+    $results = $this->Admin->get_packages_by_key($query, $current);
+    $this->load->view('admin/partials/pagination', array('packages' => $results, 'current' => $current));
+  }
+
+  public function pagedResultsSolo($current){
+    $results = $this->Admin->get_trim_packages(10 * ($current-1));
+    $this->load->view('admin/partials/packages', array('packages' => $results));
+  }
+
+  public function pagedPaginationSolo($current){
+    $this->session->set_userdata('current', $current);
+    $results = $this->Admin->getpackages($current);
+    $this->load->view('admin/partials/pagination', array('packages' => $results, 'current' => $current));
+  }
+
+  public function currentPagination(){
+    $results = $this->Admin->getpackages($this->session->userdata('current'));
+    $this->load->view('admin/partials/pagination', array('packages' => $results, 'current' => $this->session->userdata('current')));
+  }
+
+
 }
-
-
 ?>

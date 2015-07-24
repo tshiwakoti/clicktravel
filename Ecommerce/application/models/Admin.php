@@ -18,6 +18,11 @@ class Admin extends CI_Model {
 
   }
 
+  public function get_trim_packages($offset){
+    return $this->db->query("SELECT packages.id, packages.duration, packages.price,
+    cities.name from packages LEFT JOIN cities on cities.id = packages.city_id LIMIT {$offset}, 10;")->result_array();
+  }
+
   public function get_order_by_id($id){
     $query = "SELECT * FROM orders WHERE id = {$id}";
     return $this->db->query($query)->row_array();
@@ -68,11 +73,16 @@ class Admin extends CI_Model {
     $this->db->query($query, $values);
   }
 
-  public function get_packages_by_key($post){
-    $key = $post['search'];
+  public function get_packages_by_key($key){
+    return $this->db->query("SELECT * from packages LEFT JOIN cities on cities.id = packages.city_id WHERE packages.id LIKE '%{$key}%' OR 
+    packages.duration LIKE '%{$key}%' OR packages.price LIKE '%{$key}%' OR cities.name LIKE '%{$key}%';")->result_array();
+  }
+
+  public function get_trim_packages_by_key($key, $offset){
     return $this->db->query("SELECT packages.id, packages.duration, packages.price,
     cities.name from packages LEFT JOIN cities on cities.id = packages.city_id WHERE packages.id LIKE '%{$key}%' OR 
-    packages.duration LIKE '%{$key}%' OR packages.price LIKE '%{$key}%' OR cities.name LIKE '%{$key}%';")->result_array();
+    packages.duration LIKE '%{$key}%' OR packages.price LIKE '%{$key}%' OR cities.name LIKE '%{$key}%' 
+    LIMIT {$offset}, 10;")->result_array();
   }
 
   public function get_orders_by_key($post){

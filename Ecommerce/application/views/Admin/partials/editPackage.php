@@ -15,11 +15,19 @@
             <label for="price" class="white-text active">Price</label>
           </div>
           <div class="input-field col s8 offset-s2">
-            <select class="browser-default" name="city" selected=<?= $package['city_id'] ?>>
+            <select class="browser-default" name="city">
 <?php
               foreach ($cities as $city) {
 ?>
-                <option value=<?= $city['id'] ?>><?= $city['name'] ?></option>
+                <option 
+<?php
+                if ($city['id'] == $package['city_id']){
+?>
+                  selected="selected"
+<?php
+                }
+?>
+                value=<?= $city['id'] ?>><?= $city['name'] ?></option>
 <?php
               }
 ?>

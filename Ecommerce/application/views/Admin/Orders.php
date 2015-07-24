@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Orders </title>
+    <title>Orders</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
@@ -28,6 +28,7 @@
             return false;
           }
         });
+
         $(document).on("click", ".hideEdit", function(){
           $('#edit').fadeToggle();
         });
@@ -52,11 +53,15 @@
           });
         });
 
-        $("#orderSearch").submit(function(){
+        $("#orderSearch").keyup(function(){
           $.post("/admins/searchOrders", $(this).serialize(), function(res){
             console.log(res);
             $("#tableBody").html(res);
           });
+          return false;
+        });
+
+        $("#orderSearch").submit(function(){
           return false;
         });
 
@@ -177,19 +182,14 @@
         </tbody>
       </table>
     </div>
-    <div id = "pagination">
-      <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active grey"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!">6</a></li>
-        <li class="waves-effect"><a href="#!">7</a></li>
-        <li class="waves-effect"><a href="#!">8</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-      </ul>
+    <div class="row">
+      <div id = "pagination">
+        <ul class="pagination col s6 offset-s3">
+          <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="active grey"><a href="#!">1</a></li>
+          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div id="edit" class="hoverable">

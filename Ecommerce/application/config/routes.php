@@ -64,3 +64,8 @@ $route['editPackage/(:any)'] = 'Admins/editPackage/$1';
 
 $route['processCoords'] = 'Controller/processCoords';
 $route['checkout'] = 'Controller/checkout';
+$route['admin/pagination/(:any)'] = 'admin/pagination/$1';
+$route['admin/pagedPagination/(:any)/(:any)'] = 'admin/pagedPagination/$1/$2';
+$route['admin/pagedResults/(:any)/(:any)'] = 'admin/pagedResults/$1/$2';
+$route['admin/pagedPaginationSolo/(:any)'] = 'admin/pagedPaginationSolo/$1';
+$route['admin/pagedResultsSolo/(:any)'] = 'admin/pagedResultsSolo/$1';

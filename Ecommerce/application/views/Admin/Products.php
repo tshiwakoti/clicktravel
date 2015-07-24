@@ -1,175 +1,219 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>packages </title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-    <script type="text/javascript">
-      $(document).ready(function(){
-        
-        $.get('admins/allProducts', function(res){
-          $('#tableBody').html(res);
-        });
-
-        $(".newprod").click(function(){
-          $.get('/admins/newPackage', function(res){
-            $("#addPackage").html(res);
-            return false;
-          });
-          $("#addPackage").fadeToggle();
-        });
-
-        $(document).on("click", ".hideAdd", function(){
-          $("#addPackage").fadeToggle();
-          return false;
-        });
-
-        $(document).on("submit", "#addNewProduct", function(){
-          $.post("/admins/newPackageProcess", $(this).serialize(), function(res){
-            $("#addPackage").html(res);
-            return false;
-          });
-        });
-
-        $(document).on('click', 'a', function(){
-          if ($(this).attr('name') == 'edit'){
-            var id = $(this).attr('class');
-            $.get('editPackage/' + id, function(res){
-              console.log(res);
-              $('#editPackage').html(res);
-            });
-            $("#editPackage").fadeToggle();
-            return false;
-          } else if ($(this).attr('name') == 'delete') {
-            var id = $(this).attr('class');
-            $("input[name=packageID]").val(id);
-            $("#removePackage").fadeToggle();
-            return false;
-          }
-        });
-
-        $(document).on("click", ".hideDelete", function(){
-          $("#removePackage").fadeToggle();
-          return false;
-        });
-
-        $(document).on("submit", "#deletePackage", function(){
-          $("#removePackage").fadeToggle();
-          $.post('/admins/deletePackage', $(this).serialize(), function(res){
-            $("$tableBody").html(res);
-            return false;
-          });
-        });
-
-        $(document).on("click", ".hideEdit", function(){
-          $("#editPackage").fadeToggle();
-          return false;
-        });
-
-        $(document).on("submit", "#changePackage", function(){
-          $.post("/admins/editPackageProcess", $(this).serialize(), function(res){
-            $("#tableBody").html(res);
-            return false;
-          });
-          $("#editPackage").fadeToggle();
-        });
-
-        $("#changePackage").submit(function(){
-          $("#editPackage").fadeToggle();
-          $.post("/admins/editPackageProcess", $(this).serialize(), function(res){
-            $("#tableBody").html(res);
-          });
-          return false;
-        });
-
-        $("#prodSearch").submit(function(){
-          $.post("/admins/searchPackages", $(this).serialize(), function(res){
-            $("#tableBody").html(res);
-          });
-          return false;
-        });
-
-      });
-    </script>
-    <style>
-
-    #content{
-      margin: 0px auto;
-      background-color: white;
-    }
-
-    #pagination{
-      margin: 0px auto;
-      width: 50%;
-    }
+<head>
+  <meta charset="utf-8">
+  <title>Packages</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <script type="text/javascript">
+  $(document).ready(function(){
     
-    button{
-      margin-top: 25px;
-    }
+    $.get('admins/allProducts', function(res){
+      $('#tableBody').html(res);
+    });
+    $.get('admins/defaultPagination', function(res){
+      $('#pagination').html(res);
+    });
 
-    #addPackage{
-      position: fixed;
-      width: 70%;
-      height: 70%;
-      left: 15%;
-      right: 15%;
-      top: 20%;
-      background-color: gray;
-      display: none;
-      z-index: 3;
-      border-radius: 10px;
-    }
-      #addPackage button{
-        margin: 10px;
-      }
-    #editPackage{
-      position: fixed;
-      width: 70%;
-      height: 70%;
-      left: 15%;
-      right: 15%;
-      top: 20%;
-      background-color: gray;
-      display: none;
-      z-index: 3;
-      border-radius: 10px;
-    }
-      #editPackage button{
-        margin: 10px;
-      }
-    #removePackage{
-      position: fixed;
-      width: 70%;
-      height: 70%;
-      left: 15%;
-      right: 15%;
-      top: 20%;
-      background-color: gray;
-      display: none;
-      z-index: 3;
-      border-radius: 10px;
-    }
-      #removePackage button{
-        margin: 10px;
-      }
+    $(".newprod").click(function(){
+      $.get('/admins/newPackage', function(res){
+        $("#addPackage").html(res);
+      });
+      $("#addPackage").fadeToggle();
+      return false;
+    });
 
-    .input-field label {
-        color: white;
-    }
-    /* label focus color */
-    .input-field input[type=text]:focus + label {
-      color: white;
-    }
-    /* label underline focus color */
-    .input-field input[type=text]:focus {
-      border-bottom: 1px solid white;
-      box-shadow: 0 1px 0 0 white;
-    } 
+    $(document).on("click", ".hideAdd", function(){
+      $("#addPackage").fadeToggle();
+      return false;
+    });
 
-    </style>
-  </head>
+    $(document).on("submit", "#addNewProduct", function(){
+      $.post("/admins/newPackageProcess", $(this).serialize(), function(res){
+        $("#tableBody").html(res);
+      });
+      $.get('admins/currentPagination', function(res){
+        $('#pagination').html(res);
+      });
+      $("#addPackage").fadeToggle();
+      return false;
+    });
+
+    $(document).on('click', 'a', function(){
+      if ($(this).attr('name') == 'edit'){
+        var id = $(this).attr('class');
+        $.get('editPackage/' + id, function(res){
+          console.log(res);
+          $('#editPackage').html(res);
+        });
+        $("#editPackage").fadeToggle();
+        return false;
+      } else if ($(this).attr('name') == 'delete') {
+        var id = $(this).attr('class');
+        $("input[name=packageID]").val(id);
+        $("#removePackage").fadeToggle();
+        return false;
+      }
+    });
+
+    $(document).on("click", ".hideDelete", function(){
+      $("#removePackage").fadeToggle();
+      return false;
+    });
+
+    $(document).on("submit", "#deletePackage", function(){
+      $("#removePackage").fadeToggle();
+      $.post('/admins/deletePackage', $(this).serialize(), function(res){
+        $("#tableBody").html(res);
+      });
+      $.get('admins/currentPagination', function(res){
+        $('#pagination').html(res);
+      });
+      return false;
+    });
+
+    $(document).on("click", ".hideEdit", function(){
+      $("#editPackage").fadeToggle();
+      return false;
+    });
+
+    $(document).on("submit", "#changePackage", function(){
+      $.post("/admins/editPackageProcess", $(this).serialize(), function(res){
+        $("#tableBody").html(res);
+      });
+      $.get('admins/currentPagination', function(res){
+        $('#pagination').html(res);
+      });
+      $("#editPackage").fadeToggle();
+      return false;
+    });
+
+    $("#changePackage").submit(function(){
+      $("#editPackage").fadeToggle();
+      $.post("/admins/editPackageProcess", $(this).serialize(), function(res){
+        $("#tableBody").html(res);
+      });
+      $.get('admins/currentPagination', function(res){
+        $('#pagination').html(res);
+      });
+      return false;
+    });
+
+    $("#prodSearch").keyup(function(){
+      $.post("/admins/searchPackages", $(this).serialize(), function(res){
+        $("#tableBody").html(res);
+      });
+      $.post("/admins/pagination/1", $(this).serialize(), function(res){
+        $("#pagination").html(res);
+      });
+      return false;
+    });
+
+    $("#prodSearch").submit(function(){
+      return false;
+    });
+
+    $(document).on("click", "#pagination a", function(){
+      var id = $(this).attr('value');
+      var query = $('input[name=search]').val();
+      if (query == '') {
+        $.get("/admins/pagedPaginationSolo/" + id, function(res){
+          $("#pagination").html(res);
+        });
+        $.get("/admins/pagedResultsSolo/" + id, function(res){
+          $("#tableBody").html(res);
+        });
+      } else {
+        $.get("/admins/pagedPagination/" + id + '/' + query, function(res){
+          $("#pagination").html(res);
+        });
+        $.get("/admins/pagedResults/" + id + '/' + query, function(res){
+          $("#tableBody").html(res);
+        });
+      }
+      return false;
+    });
+
+  });
+</script>
+<style>
+
+#content{
+  margin: 0px auto;
+  background-color: white;
+}
+
+#pagination{
+  margin: 0px auto;
+  width: 50%;
+}
+
+button{
+  margin-top: 25px;
+}
+
+#addPackage{
+  position: fixed;
+  width: 70%;
+  height: 70%;
+  left: 15%;
+  right: 15%;
+  top: 20%;
+  background-color: gray;
+  display: none;
+  z-index: 3;
+  border-radius: 10px;
+}
+#addPackage button{
+  margin: 10px;
+}
+#editPackage{
+  position: fixed;
+  width: 70%;
+  height: 70%;
+  left: 15%;
+  right: 15%;
+  top: 20%;
+  background-color: gray;
+  display: none;
+  z-index: 3;
+  border-radius: 10px;
+}
+#editPackage button{
+  margin: 10px;
+}
+#removePackage{
+  position: fixed;
+  width: 70%;
+  height: 70%;
+  left: 15%;
+  right: 15%;
+  top: 20%;
+  background-color: gray;
+  display: none;
+  z-index: 3;
+  border-radius: 10px;
+}
+#removePackage button{
+  margin: 10px;
+}
+
+.input-field label {
+  color: white;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: white;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+} 
+
+</style>
+</head>
 
 <body>
   <div id = "wrapper">
@@ -216,19 +260,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="row">
       <div id = "pagination">
-        <ul class="pagination">
-          <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-          <li class="active grey darken-1"><a href="#!">1</a></li>
-          <li class="waves-effect"><a href="#!">2</a></li>
-          <li class="waves-effect"><a href="#!">3</a></li>
-          <li class="waves-effect"><a href="#!">4</a></li>
-          <li class="waves-effect"><a href="#!">5</a></li>
-          <li class="waves-effect"><a href="#!">6</a></li>
-          <li class="waves-effect"><a href="#!">7</a></li>
-          <li class="waves-effect"><a href="#!">8</a></li>
-          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-        </ul>
       </div>
     </div>
     <div id="addPackage">
@@ -255,7 +289,7 @@
           </div>
         </form>
       </div>
-  </div>
+    </div>
   </div>
 </body>
 </html>
