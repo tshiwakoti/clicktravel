@@ -164,7 +164,7 @@ $(document).ready(function() {
   <div id="cart">
     Item(s) currently in your cart<br>
     <p>(<?= $ord['quantity']?>) <?= $ord['pickPack'] ?> Day Package(s) to <?= $ord['name'] ?></p>
-    <a href="/" id="map">Return to the map  </a><form action="/Controllers/returnToTrips" method="post"><input type="hidden" name="lat" value="{<?= $this->session->userdata('post')['lat'] ?>}" /><input type="hidden" name="lat" value="{<?= $this->session->userdata('post')['lng'] ?>}" /><a href="#" onlick="this.parentNode.submit()" id="trips">  Back to city selection </a></form>
+    <a href="/" id="map">Return to the map  </a><a href="/Controller/returnToTrips" id="trips">  Back to city selection </a>
 
   </div>
   <form id="payment-form" action="checkout.php" method="POST">
