@@ -6,7 +6,7 @@ class Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->output->enable_profiler();
+		//$this->output->enable_profiler();
 		$this->load->library('session');
 		$this->load->library('googlemaps');
 		$this->load->library('form_validation');
@@ -22,7 +22,7 @@ class Controller extends CI_Controller {
 
 	public function processCoords(){
 		$post = $this->input->post();
-		$latLngSess = array('lat' => $post['lat'], 'lng' => $post['lng']);
+		$latLngSess = array('lat' => $post['lat'], 'lng' => $post['lng'], 'city_name' => $post['city_name']);
 		$this->session->set_userdata('post', $latLngSess);
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
 		$results = array('results' => $post, 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
@@ -48,13 +48,8 @@ class Controller extends CI_Controller {
 		$this->load->view("users/itinerary", $post);
 	}
 	public function returnToTrips(){
-		$post = $this->session->userdata();
-		var_dump($post);
-		die();
-		$latLngSess = array('lat' => $post['lat'], 'lng' => $post['lng']);
-		$this->session->set_userdata('post', $latLngSess);
-		$cities = $this->Model->getCities($post['lat'], $post['lng']);
-		$results = array('results' => $post, 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
+		$cities = $this->Model->getCities($this->session->userdata('post')['lat'], $this->session->userdata('post')['lng']);
+		$results = array('results' => $this->session->userdata('post'), 'cities' => $cities, 'errors' => '');
 		$this->load->view('users/trips', $results);
 	}
 	public function register(){

@@ -130,6 +130,18 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC--bZJDGwk">
     </script>
     <script type="text/javascript">
+      $(document).ready(function(){
+        
+        $("#box").on("click", function(){
+          $("#bfn").val($('#fn').val());
+          $("#bln").val($('#ln').val());
+          $("#ba").val($('#a').val());
+          $("#ba2").val($('#a2').val());
+          $("#bc").val($('#c').val());
+          $("#bs").val($('#s').val());
+          $("#bz").val($('#z').val());
+  });
+});
     </script>
   </head>
   <body>
@@ -155,19 +167,26 @@
         <p>Zipcode:</p>
       </div>
       <div id="checkoutInfo">
-        <p><input type="text" name="first_name"></p>
-        <p><input type="text" name="last_name"></p>
-        <p><input type="text" name="address"></p>
-        <p><input type="text" name="address2"></p>
-        <p><input type="text" name="city"></p>
-        <p><input type="text" name="state"></p>
-        <p><input type="text" name="zipcode"></p>
+        <p><input type="text" name="first_name" id="fn"></p>
+        <p><input type="text" name="last_name" id="ln"></p>
+        <p><input type="text" name="address" id="a"></p>
+        <p><input type="text" name="address2" id="a2"></p>
+        <p><input type="text" name="city" id="c"></p>
+        <p><input type="text" name="state" id="s"></p>
+        <p><input type="text" name="zipcode" id="z"></p>
       <!-- </form> -->
     </div>
     </div>
+
+
+
+
+
+
+
     <div id="billing">
       <h2>Billing Information</h2>
-      <p>Same as shipping<input type="checkbox"></p>
+      <p>Same as shipping<input type="checkbox" id="box"></p>
       <div id="billingLabels">
         <p>First Name:</p>
         <p>Last Name:</p>
@@ -181,15 +200,15 @@
         <p>Expiration:</p>
       </div>
       <div id="billingInfo">
-        <p><input type="text" name="bill_first_name"></p>
-        <p><input type="text" name="bill_last_name"></p>
-        <p><input type="text" name="bill_address"></p>
-        <p><input type="text" name="bill_address2"></p>
-        <p><input type="text" name="bill_city"></p>
-        <p><input type="text" name="bill_state"></p>
-        <p><input type="text" name="bill_zipcode"></p>
-        <p><input type="password" name="ccnumber"></p>
-        <p><input type="password" name="cvv"></p>
+        <p><input type="text" name="bill_first_name" id="bfn"></p>
+        <p><input type="text" name="bill_last_name" id="bln"></p>
+        <p><input type="text" name="bill_address" id="ba"></p>
+        <p><input type="text" name="bill_address2" id="ba2"></p>
+        <p><input type="text" name="bill_city" id="bc"></p>
+        <p><input type="text" name="bill_state" id="bs"></p>
+        <p><input type="text" name="bill_zipcode" id="bz"></p>
+        <p><input type="password" name="ccnumber" id="cc"></p>
+        <p><input type="password" name="cvv" id="cvv"></p>
 
         <p><select name="exp_month">
           <option> - Month - </option>
