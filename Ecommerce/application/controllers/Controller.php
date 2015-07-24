@@ -23,7 +23,7 @@ class Controller extends CI_Controller {
 	public function processCoords(){
 		$post = $this->input->post();
 		$latLngSess = array('lat' => $post['lat'], 'lng' => $post['lng']);
-		$this->session->set_userdata('post', $latLngSess);
+		$this->session->set_userdata('post', $post);
 		$cities = $this->Model->getCities($post['lat'], $post['lng']);
 		$results = array('results' => $post, 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
 		$this->load->view('users/trips', $results);
@@ -40,7 +40,7 @@ class Controller extends CI_Controller {
 			$results = array('results' => $this->session->userdata('post'), 'cities' => $cities, 'errors' => $this->session->flashdata('errors'));
 			$this->load->view('users/trips', $results);
 		}
-	}	
+	}
 	public function submitPayment(){
 		$newOrd = $this->input->post();
 		$bill = $this->Model->newOrder($newOrd);
@@ -49,6 +49,9 @@ class Controller extends CI_Controller {
 	}
 	public function returnToTrips(){
 		$this->load->view("users/trips");
+	}
+	public function confirmation(){
+		$this->load->view('users/confirmation', array('post' => $this->session->userdata('post'), 'dest' => $this->session->userdata('city_name')));
 	}
 
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Checkout</title>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <?='<script type="text/javascript">Stripe.setPublishableKey("' . STRIPE_PUBLIC_KEY . '");</script>';?>
   <style type="text/css">
@@ -28,7 +29,7 @@
   margin-bottom: 80px;
   margin-top: 60px;
 }
-#checkout{
+#payment-form{
   width: 450px;
   height: 500px;
   background-color: rgba(0,0,0,.5);
@@ -41,12 +42,12 @@
   margin-top: 50px;
   margin-right: 50px;
 }
-#checkout form{
+#payment-form form{
   margin-top: 40px;
   display: inline-block;
   vertical-align: top;
 }
-#checkout input{
+#payment-form input{
   background-color: black;
   margin: 3px;
   display: inline-block;
@@ -54,10 +55,10 @@
   line-height: 0px; 
   text-align: center;
 }
-#checkout #checkoutLabels, #checkoutInfo{
+#payment-form #checkoutLabels, #checkoutInfo{
   display: inline-block;
 }
-#checkout #checkoutLabels{
+#payment-form #checkoutLabels{
   text-align: right;
   line-height: 26px;
 }
@@ -109,52 +110,106 @@
   text-align: center;
   padding: 10px;
 }
+
+#submitBtn{
+  padding: 10px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript"
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUrqgqo3AkPxzn9xH5Rn97MC--bZJDGwk">
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-  $("#payment-form").submit(function(event) {
-    $('#submitBtn').attr('disabled', 'disabled');
-    var error = false;
+// This function is just used to display error messages on the page.
+// Assumes there's an element with an ID of "payment-errors".
+function reportError(msg) {
+  // Show the error in the form:
+  $('#payment-errors').text(msg).addClass('alert alert-error');
+  // re-enable the submit button:
+  $('#submitBtn').prop('disabled', false);
+  return false;
+}
 
-    // Get the values:
-    var ccNum = $('.card-number').val(),
-    cvcNum = $('.card-cvc').val(),
-    expMonth = $('.card-expiry-month').val(),
-    expYear = $('.card-expiry-year').val();
+// Assumes jQuery is loaded!
+// Watch for the document to be ready:
+// $(document).ready(function() {
 
-    // Validate the number:
-    if (!Stripe.card.validateCardNumber(ccNum)) {
-      error = true;
-      reportError('The credit card number appears to be invalid.');
-    }
+//   // Watch for a form submission:
+//   $("#payment-form").submit(function(event) {
 
-    // Validate the CVC:
-    if (!Stripe.card.validateCVC(cvcNum)) {
-      error = true;
-      reportError('The CVC number appears to be invalid.');
-    }
+//     // Flag variable:
+//     var error = false;
 
-    // Validate the expiration:
-    if (!Stripe.card.validateExpiry(expMonth, expYear)) {
-      error = true;
-      reportError('The expiration date appears to be invalid.');
-    }
-    if (!error) {
-        // Get the Stripe token:
-        Stripe.card.createToken({
-          number: ccNum,
-          cvc: cvcNum,
-          exp_month: expMonth,
-          exp_year: expYear
-        }, stripeResponseHandler);
-      }
-      return false;
-    });
-  });
+//     // disable the submit button to prevent repeated clicks:
+//     $('#submitBtn').attr("disabled", "disabled");
+
+//     // Get the values:
+//     var ccNum = $('.card-number').val(), cvcNum = $('.card-cvc').val(), expMonth = $('.card-expiry-month').val(), expYear = $('.card-expiry-year').val();
+
+//     // Validate the number:
+//     if (!Stripe.card.validateCardNumber(ccNum)) {
+//       error = true;
+//       reportError('The credit card number appears to be invalid.');
+//     }
+
+//     // Validate the CVC:
+//     if (!Stripe.card.validateCVC(cvcNum)) {
+//       error = true;
+//       reportError('The CVC number appears to be invalid.');
+//     }
+
+//     // Validate the expiration:
+//     if (!Stripe.card.validateExpiry(expMonth, expYear)) {
+//       error = true;
+//       reportError('The expiration date appears to be invalid.');
+//     }
+
+//     // Validate other form elements, if needed!
+
+//     // Check for errors:
+//     if (!error) {
+
+//       // Get the Stripe token:
+//       Stripe.card.createToken({
+//         number: ccNum,
+//         cvc: cvcNum,
+//         exp_month: expMonth,
+//         exp_year: expYear
+//       }, stripeResponseHandler);
+
+//     }
+
+//     // Prevent the form from submitting:
+//     return false;
+
+//   }); // Form submission
+
+// }); // Document ready.
+
+// // Function handles the Stripe response:
+// function stripeResponseHandler(status, response) {
+
+//   // Check for an error:
+//   if (response.error) {
+
+//     reportError(response.error.message);
+
+//   } else { // No errors, submit the form:
+
+//     var f = $("#payment-form");
+
+//     // Token contains id, last4, and card type:
+//     var token = response['id'];
+
+//     // Insert the token into the form so it gets submitted to the server
+//     f.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+
+//     // Submit the form:
+//     f.get(0).submit();
+
+//   }
+
+} // End of stripeResponseHandler() function.
 </script>
 </head>
 <body>
@@ -167,22 +222,10 @@ $(document).ready(function() {
     <a href="/" id="map">Return to the map  </a><a href="/Controller/returnToTrips" id="trips">  Back to city selection </a>
 
   </div>
-  <form id="payment-form" action="checkout.php" method="POST">
-    <div id="payment-errors"></div>
-    <label>Card Number</label>
-    <input type="text" size="20" autocomplete="off">
-    <span>Enter the number without spaces or hyphens.</span>
-    <label>CVC</label>
-    <input type="text" size="4" autocomplete="off">
-    <label>Expiration (MM/YYYY)</label>
-    <input type="text" size="2">
-    <span> / </span>
-    <input type="text" size="4">
-    <input type="submit" id="submitBtn">
-  </form>
-  <div id="checkout">
+  <div id="payment-errors"></div>
+  <div id="payment-form">
     <h2>Shipping Information</h2>
-    <form action="/Controller/submitPayment" method="post">
+    <form action="confirmation" method="post">
       <div id="checkoutLabels">
         <p>First Name:</p>
         <p>Last Name:</p>
@@ -214,9 +257,9 @@ $(document).ready(function() {
         <p>City:</p>
         <p>State:</p>
         <p>Zipcode:</p>
-        <p>Card Number:</p>
-        <p>Security Code:</p>
-        <p>Expiration:</p>
+        <p><label>Card Number:</label></p>
+        <p><label>CVC:</label></p>
+        <p><label>Expiration Date (MM:YYY):</label>:</p>
       </div>
       <div id="billingInfo">
         <p><input type="text" name="bill_first_name"></p>
@@ -226,37 +269,12 @@ $(document).ready(function() {
         <p><input type="text" name="bill_city"></p>
         <p><input type="text" name="bill_state"></p>
         <p><input type="text" name="bill_zipcode"></p>
-        <p><input type="password" name="ccnumber"></p>
-        <p><input type="password" name="cvv"></p>
-
-        <p><select name="exp_month">
-          <option> - Month - </option>
-          <option value="January">January</option>
-          <option value="Febuary">Febuary</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December">December</option>
-        </select>
-        <select name="exp_year">
-          <option> - Year - </option>
-          <option value="2023">2023</option>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2020</option>
-          <option value="2019">2019</option>
-          <option value="2018">2018</option>
-          <option value="2017">2017</option>
-          <option value="2016">2016</option>
-          <option value="2015">2015</option>
-        </select></p>
-        <input type="submit" id="paynow" value="Pay Now"><br>
+        <p><input type="text" size="20" autocomplete="off"></p>
+        <p><input type="text" size="4" automplete="off"></p>
+        <p><input type="text" size="2">
+        <span> / </span>
+        <input type="text" size="4"></p>
+        <input type="submit" id="submitBtn"><br>
       </form>
     </div>
   </body>

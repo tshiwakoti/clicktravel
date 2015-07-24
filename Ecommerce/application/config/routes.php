@@ -69,3 +69,4 @@ $route['admin/pagedPagination/(:any)/(:any)'] = 'admin/pagedPagination/$1/$2';
 $route['admin/pagedResults/(:any)/(:any)'] = 'admin/pagedResults/$1/$2';
 $route['admin/pagedPaginationSolo/(:any)'] = 'admin/pagedPaginationSolo/$1';
 $route['admin/pagedResultsSolo/(:any)'] = 'admin/pagedResultsSolo/$1';
+$route['confirmation'] = 'Controller/confirmation';

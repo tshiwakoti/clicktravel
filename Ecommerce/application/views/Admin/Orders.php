@@ -187,7 +187,7 @@
         <ul class="pagination col s6 offset-s3">
           <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
           <li class="active grey"><a href="#!">1</a></li>
-          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
         </ul>
       </div>
     </div>
