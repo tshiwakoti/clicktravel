@@ -507,3 +507,5 @@ $config['stripe_key_live_public']         = '';
 $config['stripe_key_live_secret']         = 'sk_live_1vXnVS3kqoBrtWRBe2CsH5Iv';
 $config['stripe_test_mode']               = TRUE;
 $config['stripe_verify_ssl']              = FALSE;
+define('STRIPE_PRIVATE_KEY', 'sYVEehEYsyyrCc8Fp94xIeMC');
+define('STRIPE_PUBLIC_KEY', 'XUsn5ZRkIaNVEkxsbIEvpXem');
