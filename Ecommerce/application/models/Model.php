@@ -19,8 +19,7 @@ class Model extends CI_Model {
 
 	public function getCities($latitude, $longitude)
 	{
-		$query = "SELECT name, descr FROM cities
-					WHERE ({$latitude} > lat-12 AND {$latitude} < lat+12) AND ({$longitude} > lng-12 AND {$longitude} < lng+12);";
+		$query = "SELECT name, descr FROM cities WHERE ( {$latitude} > lat-12 AND {$latitude} < lat+12 ) AND ( {$longitude} > lng-12 AND {$longitude} < lng+12 );";
 		return $this->db->query($query)->result_array();
 	}
 

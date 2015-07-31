@@ -48,8 +48,8 @@
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         var displayElement = document.getElementById('display');
         google.maps.event.addListener(map, "click", function( event ) {
-          var lat = event.latLng.A;
-          var lng = event.latLng.F;
+          var lat = event.latLng.G;
+          var lng = event.latLng.K;
           getAddress(lat, lng);
           //Fill hidden form with coordinates and name
           $("input[name=lat]").val(lat);
@@ -85,7 +85,7 @@
         color: white;
         background-color: black;
         border: 1px solid white;
-        border-radius: 5px;
+        border-radius: 6px;
         height: 40px;
         width: 110px;
         position: absolute;
